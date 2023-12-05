@@ -1,16 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import styles from './productDetails.style'
-import { Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons, SimpleLineIcons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { COLORS, SIZES } from '../constants'
 import { Image } from 'react-native'
 import { SafeAreaView } from 'react-native'
 import { useState } from 'react'
 import { ScrollView } from 'react-native'
+import { useRoute } from '@react-navigation/native'
 
 const ProductDetails = ({navigation}) => {
-  
+	const route = useRoute();
+	const {item} = route.params
+	
 	const [count,setCount] = useState(1)
 	
 	const increment= () => {
@@ -33,13 +36,13 @@ const ProductDetails = ({navigation}) => {
 			<Ionicons name='heart' size={30} color={COLORS.primary} />
 			</TouchableOpacity>
 		</SafeAreaView>
-		<Image source={{uri:"https://images.unsplash.com/photo-1601084881623-cdf9a8ea242c?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}}
+		<Image source={{uri: item.imageUrl}}
 		style={styles.image}/>
 		<View style={styles.details}>
 			<View style={styles.titleRow}>
-				<Text style={styles.title}>Product</Text>
+				<Text style={styles.title}>{item.title}</Text>
 				<View style={styles.priceWrapper}>
-					<Text style={styles.price}>$660.78</Text>
+					<Text style={styles.price}>{item.price}</Text>
 				</View>
 			</View>
 			<View style={styles.ratingRow}>
@@ -64,7 +67,7 @@ const ProductDetails = ({navigation}) => {
 			</View>
 			<View style={styles.descriptionWrapper}>
 				<Text style={styles.description}>Description</Text>
-				<Text style={styles.descText}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+				<Text style={styles.descText}>{item.description}</Text>
 			</View>
 
 			<View style={{marginBottom: SIZES.small}}>
@@ -78,8 +81,17 @@ const ProductDetails = ({navigation}) => {
 						<MaterialCommunityIcons name="truck-delivery-outline" size={20}/>
 						<Text>Free Delivery</Text>
 					</View>
-						
 				</View>
+
+						
+					<View style={styles.cartRow}> 
+						<TouchableOpacity onPress={()=>{}} style={styles.cartBtn}>
+							<Text style={styles.cartTitle}>BUY NOW</Text>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={()=>{}} style={styles.addCart}>
+							<Fontisto name='shopping-bag' size={20} color={COLORS.lightWhite}/>
+						</TouchableOpacity>
+					</View>
 			</View>
 			
 			

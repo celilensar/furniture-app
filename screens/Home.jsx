@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import { StyleSheet } from 'react-native'
@@ -10,7 +10,10 @@ import { ScrollView } from 'react-native'
 import Carousel from '../components/Home/Carousel'
 import Headings from '../components/Home/Headings'
 import ProductRow from '../components/products/ProductRow'
+import useFetch from '../hook/useFetch'
 const Home = () => {
+
+	const {data,isLoading, error} = useFetch()
   return (
 	<SafeAreaView>
 	  <View style={styles.appBarWrapper}>
